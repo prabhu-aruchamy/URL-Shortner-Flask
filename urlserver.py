@@ -56,7 +56,6 @@ def home():
             return render_template('home.html', lval="Login")
 
 
-
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
@@ -123,7 +122,6 @@ def shorturl():
             return render_template('home.html', lval="Login")
 
 
-
 @app.route('/myurl')
 def myurl():
     userID = str(request.cookies.get('userID'))
@@ -134,7 +132,6 @@ def myurl():
         return render_template('myURLstats.html', items=items)
     else:
         return render_template('home.html', lval="Login")
-
 
 
 @app.route('/s/<url>')
@@ -226,8 +223,6 @@ def debugERROR():
     sz7 = dc.fetchone()
     return str(sz7[1])
 
-
-    
 
 if __name__ == '__main__':
     app.run(debug=True)
