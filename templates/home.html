@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<title>URL Shortner</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}">
+
+<!-- <style>
+  .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+  
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+  .fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+  .fa-youtube {
+    background: #bb0000;
+    color: white;
+  }
+  
+  .fa-instagram {
+    background: #125688;
+    color: white;
+  }
+  
+  .fa-android {
+    background: #a4c639;
+    color: white;
+  }
+  
+  </style> -->
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="#home" class="w3-bar-item w3-button"><b>URL</b> Shortner</a>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="login" class="w3-bar-item w3-button">{{lval}}</a>
+      <a href="#about" class="w3-bar-item w3-button">About</a>
+      <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+      <a href="shortURL" class="w3-bar-item w3-button">{{sval}}</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
+  <img class="w3-image" src="{{url_for('static', filename='img/bg.jpeg')}}" alt="Architecture" width="1500" height="800">
+  <div class="w3-display-middle w3-margin-top w3-center">
+    <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>URL</b></span> <span class="w3-hide-small w3-text-light-grey">Shortner</span></h1>
+  </div>
+</header>
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+
+
+  <!-- About Section -->
+	<div class="intro section" id="about">
+		<div class="container">
+				<div class="units-row units-split wrap">
+				<div class="unit-20">
+					<img id="myImage" src="https://3.bp.blogspot.com/-1otUrc_k1uI/Wz5FtP-bjSI/AAAAAAAALwI/rekFnWb9xjcMGKZTpN89KTNqZ6tNi3o8ACLcBGAs/s150/FB_IMG_1500174562970.jpg" alt="Avatar">
+				</div>
+				<div class="unit-80">
+					<h1>I<br><span id="typed" newTyped()></span></h1>					
+				</div>
+				<p>
+					I am Prabhu. I am a Tech YouTuber and a Blogger I am Very much interested in Online Marketing and Creating contents on youtube … More than that, I am a UG in Computer Science and Engineering at Amrita Vishwa vidyapeetham.
+				</p>				
+			</div>
+		</div>
+	</div>
+<!-- 
+  <div class="w3-row-padding w3-grayscale">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <img src="/w3images/team2.jpg" alt="John" style="width:100%">
+      <h3>John Doe</h3>
+      <p class="w3-opacity">CEO & Founder</p>
+      <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
+      <h3>Jane Doe</h3>
+      <p class="w3-opacity">Architect</p>
+      <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
+      <h3>Mike Ross</h3>
+      <p class="w3-opacity">Architect</p>
+      <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <img src="/w3images/team4.jpg" alt="Dan" style="width:100%">
+      <h3>Dan Star</h3>
+      <p class="w3-opacity">Architect</p>
+      <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
+    </div>
+  </div> -->
+
+  <!-- <div class="container">
+    <div class="units-row units-split wrap">
+    <div class="unit-20">
+        <img src="img/IMG_6273_edited.jpg" alt="Avatar">
+    </div>
+    <div class="unit-80">
+        <h1>I<br><span id="typed">co</span><span class="typed-cursor">|</span></h1>					
+    </div>
+    <p>
+        Rajasekar M. I, as an Engineer, aspire to contribute to the revolutionizing of the world by means of Computer
+        Science. Technically, a Web Developer, App Developer and a Technological Journalist. I am inclined against the
+        technologies of Neural Networks and Natural Language Processing. GitHub is my homepage.
+    </p>				
+</div>
+</div> -->
+
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-32" id="contact">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact</h3>
+    <p>Lets get in touch and talk about your next project.</p>
+    <form action="/action_page.php" target="_blank">
+      <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Email" required name="Email">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Subject" required name="Subject">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Comment" required name="Comment">
+      <button class="w3-button w3-black w3-section" type="submit">
+        <i class="fa fa-paper-plane"></i> SEND MESSAGE
+      </button>
+    </form>
+  </div>
+  
+<!-- Image of location/map -->
+<div class="w3-container">
+  <img src="{{url_for('static', filename='img/prabhu1.jpeg')}}" class="w3-image" style="width:100%">
+</div>
+
+<!-- <div  style=" margin: auto; padding: 10px; width: 30%; left: 50%;">
+  <a href="https://www.facebook.com/TheLordTech" class="fa fa-facebook"></a>
+  <a href="https://www.twitter.com/TheLordTech" class="fa fa-twitter"></a>
+  <a href="https://www.linked.com/prabhu838" class="fa fa-linkedin"></a>
+  <a href="https://www.youtube.com/TheLordTech" class="fa fa-youtube"></a>
+  <a href="https://www.instagram.com/TheLordTech" class="fa fa-instagram"></a>
+  <a href="#" class="fa fa-android"></a>  
+
+</div> -->
+
+
+
+<!-- End page content -->
+</div>
+
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+  <p>Made with ❤ by <a href="https://thelordtech.in" title="The Lord Tech" target="_blank" class="w3-hover-text-green">The Lord Tech</a></p>
+</footer>
+
+<script src="{{url_for('static', filename='js/typed-min.js')}}"></script>
+
+<script>
+    function newTyped(){}$(function(){$("#typed").typed({
+    // Change to edit type effect
+    
+    typeSpeed:90,backDelay:700,contentType:"html",loop:!0,resetCallback:function(){newTyped()}}),$(".reset").click(function(){$("#typed").typed("reset")})});
+</script>
+
+</body>
+</html>
