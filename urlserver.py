@@ -232,7 +232,7 @@ def createDB():
 
 @app.route('/insertDemo')
 def insertDB():
-    #c.execute('''INSERT INTO user ("123456789", "Prabhu", "prabhuacse@gmail.com", "prabhu/123")''')
+    #c.execute('''INSERT INTO user ("5698", "Prabhu", "prabhuacse@gmail.com", "dummy/123")''')
     try:
         c.execute(''' INSERT INTO user(userid, name, email, password ) VALUES(?,?,?,?)''',("123", "Prabhu", "prabhuacse@gmail.com", "prabhu/1234"))
         conn.commit()
@@ -244,13 +244,6 @@ def insertDB():
 
 @app.route('/debugERROR')
 def debugERROR():
-    # email = "techbufftami@gmail.com"
-    # c.execute('SELECT COUNT(*) FROM user where email="%s"' % email)
-    # sz = c.fetchone()
-    # if str(sz[0]) == "1":
-    #     return "User Already Exists"
-    # else:
-    #     return "False"
     dc = conn.cursor()
     sql = 'SELECT original_url, visits FROM link where short_url="GYCPK8V"' 
     dc.execute(sql)
@@ -260,21 +253,3 @@ def debugERROR():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-#
-# 
-# CREATE TABLE nuser (
-#userid VARCHAR(15) PRIMARY KEY,
-#name VARCHAR(30),
-#email VARCHAR(50) UNIQUE,
-#password VARCHAR(30)
-#);
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# #
