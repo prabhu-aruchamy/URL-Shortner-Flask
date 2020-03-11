@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response
+from flask import Flask, render_template, request, redirect, url_for, make_response, session
+from flask_mail import Mail, Message
 import sqlite3
 import random
 import validators
 from datetime import datetime
-import string, random
+import string
 
 conn = sqlite3.connect('URLshortnerDB.db', check_same_thread=False)
 c = conn.cursor()
@@ -41,17 +42,33 @@ def shorten():
 
 
 app = Flask(__name__)
+app.secret_key = 'summaSecret'
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'your_Gmail_ID@gmail.com'
+app.config['MAIL_PASSWORD'] = 'your_mail_password_here'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
+
+
 @app.route('/', methods=['POST', 'GET'])
 def home():
     userID = str(request.cookies.get('userID'))
     if request.method == 'POST':
         if userID != "0":
             return render_template('home.html', sval="Short URL")
+        elif userID is None:
+            return render_template('home.html', lval="Login")
         else:
             return render_template('home.html', lval="Login")
     else:
         if userID != "0":
             return render_template('home.html', sval="Short URL")
+        elif userID is None:
+            return render_template('home.html', lval="Login")
         else:
             return render_template('home.html', lval="Login")
 
@@ -90,11 +107,27 @@ def login():
             cl.execute('SELECT userid FROM user where email="%s"' %email)
             uid = cl.fetchone()
             resp.set_cookie('userID', uid[0])
+            session['userID'] = str(uid[0])
             return resp
         else:
             return render_template('login.html', invalid="--> Invalid Credentials!")
     else:
         return render_template('login.html')
+
+
+@app.route('/send-mail', methods=['POST', 'GET'])
+def contactus():
+    if request.method == 'POST':
+        name = str(request.form['Name'])
+        email = str(request.form['Email'])
+        subject = str(request.form['Subject'])
+        comments = str(request.form['Comments'])
+        comments = "Name: "+name+"\n"+"E-mail: "+email+"\n"+"Comments: "+comments
+
+        msg = Message(subject, sender="your_email_id_that_you_have_given_above", recipients=['your_mail@gmail.com'], body=comments)
+        mail.send(msg)
+        #print("Dbg: Comments: "+comments)
+        return render_template('infopage.html', infoMessage="Mail Sent Successfully!")
 
 
 @app.route('/shortURL', methods=['POST', 'GET'])
@@ -161,6 +194,7 @@ def pagenotfound():
 def logout():
     re = make_response(render_template('home.html', lval="Login"))
     re.set_cookie('userID', "0")
+    session.pop('userID', None)
     return re
 
 
